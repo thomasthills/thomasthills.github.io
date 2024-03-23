@@ -1,6 +1,5 @@
 ---
 layout: page
-title: "BNS"
 ---
 
 # Behavioral Network Science: Language, Mind, and Society
