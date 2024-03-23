@@ -1,3 +1,8 @@
+---
+layout: page
+title: "BNS"
+---
+
 # Behavioral Network Science: Language, Mind, and Society
 
 <img src="./vanGogh5.svg" alt="image" width="300" height="auto">
