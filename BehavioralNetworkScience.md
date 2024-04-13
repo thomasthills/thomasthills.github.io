@@ -2,6 +2,14 @@
 layout: default
 title: Behavioral Network Science <br> <h1> Language, Mind, and Society </h1>
 description: A book about how and why structure matters in the behavioral sciences.
+darkmode: true
+colors:
+    gradient_left: "#155799"
+    gradient_right: "#159957"
+    header: "#fff"
+    android_theme: "#000" # this default to gradient_color
+    link: "#1e6bb8" # this default to gradient_color
+    section_title: "#155799" # this default to gradient_color
 ---
 
 
