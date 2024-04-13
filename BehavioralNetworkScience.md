@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Behavioral Network Science <br> <h1> Language, Mind, and Society </h1>
-description: some stuff
+description: A book about how and why structure matters in the behavioral sciences.
 ---
 
 
