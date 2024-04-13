@@ -1,3 +1,6 @@
+---
+layout: default
+---
 
 # Behavioral Network Science: Language, Mind, and Society
 
