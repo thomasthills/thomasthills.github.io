@@ -24,23 +24,23 @@ This includes the R code and data. You can find the code [here](https://github.c
 
 ## Table of Contents
     
--   Part I: A Brief Guide To Network Science 
+####   Part I: A Brief Guide To Network Science 
 - Chapter 1:  Making And Recognizing Networks 
 - Chapter 2:  Network Metrics
 -  Chapter 3:  Generative Network Models And Network Evolution 
--   Part II: Language
+####   Part II: Language
 - Chapter 4:  Zipf’s Law Of Meaning: The Degree Distribution Of The Mind 
 - Chapter 5:  Network Learning: Growing A Lexicon By Degrees 
 - Chapter 6:  What Is Distinctive: Exploring Edge Types In Multi-Layer Networks 
 - Chapter 7:  The Small-World Spectrum: Using Small Worlds To Compare Networks 
 - Chapter 8:  The Birthplace Of New Words: Identifying Node Origins 
 - Chapter 9:  Agent-Based Models of Language Emergence: Structure Favors The Orangutan 
--   Part III: Mind 
+####  Part III: Mind 
 - Chapter 10:  False Memories: Spreading Activation In Memory Networks 
 - Chapter 11:  Cognitive Foraging: Exploration Versus Exploitation 
 - Chapter 12:  Age-Related Cognitive Decline: A Network Enrichment Account 
 - Chapter 13:  Creativity: How Noisy Processes Create Novel Structure 
--   Part IV: Society 
+####  Part IV: Society 
 - Chapter 14:  Network Illusions: How Structure Misleads Us 
 - Chapter 15:  Group Problem Solving: Harnessing The Wisdom Of The Crowds 
 - Chapter 16:  The Segregation of Belief: How Structure Facilitates False Consensus 
