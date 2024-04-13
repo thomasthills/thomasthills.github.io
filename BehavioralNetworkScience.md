@@ -2,7 +2,7 @@
 layout: default
 ---
 
-# Behavioral Network Science: Language, Mind, and Society
+# Behavioral Network Science: <br> Language, Mind, and Society
 
 <img src="https://raw.githubusercontent.com/thomasthills/thomasthills.github.io/de56e6820560d2d87446a3218fb7cc0c469b02ab/assets/vanGogh5.svg" alt="image" width="300" height="auto">
 
