@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Behavioral Network Science <br> <h1> Language, Mind, and Society </h1> <br style="line-height: 1px" /> <h2>Thomas T. Hills </h2>
+title: Behavioral Network Science <br> <h1> Language, Mind, and Society </h1> <hr style="height:10px; visibility:hidden;" /> <h2>Thomas T. Hills </h2>
 description: A book about how and why structure matters in the behavioral sciences
 ---
 
