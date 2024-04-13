@@ -14,7 +14,7 @@ Behavioural Network Science provides a brief introduction to network science alo
 This book includes fully commented R code and data to reproduce all simulations and figures. You can find the code [here](https://github.com/thomasthills/BehavioralNetworkScience). You can download the zipped data from [here](https://warwick.ac.uk/fac/sci/psych/people/thills/thills/sampledatafilesbns.zip)
 
 *Part I* is a useful place to start for those unfamiliar with network science.
-*Part II-IV* focus on specific methodologies and topics associated with language, mind, and society.
+*Part II-IV* focuses on specific methodologies and topics associated with language, mind, and society.
 
 ## Table of Contents
     
