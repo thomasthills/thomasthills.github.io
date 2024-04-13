@@ -1,5 +1,5 @@
-title: "Behavioral Network Science: Language, Mind, and Society"
-description: Resources for 'Behavioral Network Science: Language, Mind, and Society' by Thomas T. Hills
-remote_theme: pages-themes/midnight@v0.2.0
-plugins:
-- jekyll-remote-theme # add this line to the plugins list if you already have one
+title: Behavioral Network Science: Language, Mind, and Society
+description: Resources for Behavioral Network Science: Language, Mind, and Society by Thomas T. Hills
+show_downloads: true
+google_analytics:
+theme: jekyll-theme-cayman
