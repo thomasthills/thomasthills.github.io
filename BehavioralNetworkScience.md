@@ -1,22 +1,16 @@
 ---
 layout: default
-title: Behavioral Network Science <br> <h1> Language, Mind, and Society </h1>
+title: Behavioral Network Science <br> <h1> Language, Mind, and Society </h1> <br> <h2> Thomas T. Hills </h2>
 description: A book about how and why structure matters in the behavioral sciences
-darkmode: true
-colors:
-    gradient_left: "#155799"
-    gradient_right: "#159957"
-    header: "#fff"
-    android_theme: "#000" # this default to gradient_color
-    link: "#1e6bb8" # this default to gradient_color
-    section_title: "#155799" # this default to gradient_color
-logo_url: ./vanGogh5.svg
 ---
 
 
 <img src="https://raw.githubusercontent.com/thomasthills/thomasthills.github.io/de56e6820560d2d87446a3218fb7cc0c469b02ab/assets/vanGogh5.svg" alt="image" width="300" height="auto">
 
-This page provides resources for replicating figures and simulations in _Behavioral Network Science: Language, Mind, and Society_ (Cambridge University Press) by Thomas T. Hills.  
+Behavioural Network Science provides a brief introduction to network science alongside an exploration of theory and problems in the behavioural sciences. This provides a quick background in the theory around topics like language evolution, memory, creativity, conspiracy theories, aging, human conflict, and group problem solving. 
+
+[Get the Code](https://github.com/thomasthills/BehavioralNetworkScience) 
+**BUY** [Amazon] (https://www.amazon.co.uk/Behavioral-Network-Science-Language-Society/dp/1108835406/ref=sr_1_1?dib=eyJ2IjoiMSJ9.VIM0owZ5OvE-qQ-6er4h62unMNxQAo8cpMe-0sFx52v4MPuHLrcYNF0JQ9I9znOtQS-NMgf9DX3_TLwhHH6ckR2HCvHtrtfeqKayPVm8rrRwDKrLLPtzfgfnqUJG4T77rVldkbFeTHD1qQ7D5No9QSX-N5gAOgebIKZU9C7RiYzDBhJwG0f59Lof-VTS_BauS-O0K1dMTQsQyyiw3XmPbEmgNiHRsuyn4MAwjvNjbUM.u8kVmQlhozM7bpB_Plsi9zB9J-jwMgk8q0voJPiyKkc&dib_tag=se&keywords=behavioral+network+sciences&qid=1713034639&sr=8-1)| [Cambridge University Press]([https://www.cambridge.org/us/academic/subjects/physics/statistical-physics/first-course-network-science](https://www.cambridge.org/core/books/behavioral-network-science/4418BD265A869EADFC574AD07050111D))
 
 This includes the R code and data. You can find the code [here](https://github.com/thomasthills/BehavioralNetworkScience). You can download the zipped data from [here](https://warwick.ac.uk/fac/sci/psych/people/thills/thills/sampledatafilesbns.zip)
 
