@@ -1,6 +1,3 @@
----
-layout: page
----
 
 # Behavioral Network Science: Language, Mind, and Society
 
