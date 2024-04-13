@@ -10,6 +10,7 @@ colors:
     android_theme: "#000" # this default to gradient_color
     link: "#1e6bb8" # this default to gradient_color
     section_title: "#155799" # this default to gradient_color
+logo_url: ./vanGogh5.svg
 ---
 
 
