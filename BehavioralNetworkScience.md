@@ -11,8 +11,6 @@ _Behavioural Network Science: Language, Mind, and Society_ provides a brief intr
 
 You can find the code on Github [here](https://github.com/thomasthills/BehavioralNetworkScience). You can download the zipped data from [here](https://warwick.ac.uk/fac/sci/psych/people/thills/thills/sampledatafilesbns.zip)
 
-*Part I* is a useful place to start for those unfamiliar with network science.
-*Part II-IV* focuses on specific methodologies and topics associated with language, mind, and society.
 
 ## Table of Contents
     
