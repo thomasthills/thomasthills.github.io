@@ -5,7 +5,7 @@ description: A book about how and why structure matters in the behavioral scienc
 ---
 
 
-<img src="https://raw.githubusercontent.com/thomasthills/thomasthills.github.io/de56e6820560d2d87446a3218fb7cc0c469b02ab/assets/vanGogh5.svg" alt="image" width="300" height="auto" class="center">
+<center> <img src="https://raw.githubusercontent.com/thomasthills/thomasthills.github.io/de56e6820560d2d87446a3218fb7cc0c469b02ab/assets/vanGogh5.svg" alt="Van Gogh Network" width="300" height="auto"> </center>
 
 Behavioural Network Science provides a brief introduction to network science alongside an exploration of theory and problems in the behavioural sciences, including topics like language evolution, development, memory, creativity, conspiracy theories, aging, human conflict, and group problem solving. 
 
