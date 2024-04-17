@@ -6,8 +6,8 @@ description: A book about how and why structure matters in the behavioral scienc
 
 
 <center> 
-    <img src="./BNWCover2.jpg" width = "200" style="display:inline-block;">
-    <img src="https://raw.githubusercontent.com/thomasthills/thomasthills.github.io/de56e6820560d2d87446a3218fb7cc0c469b02ab/assets/vanGogh5.svg" alt="Van Gogh Network" width="300" height="auto" style="display:inline-block;"> </center>
+    <img src="./BNWCover2.jpg" width = "200" style="display:inline-block;" style="margin: 0px 0px 100px 0px;">
+    <img src="https://raw.githubusercontent.com/thomasthills/thomasthills.github.io/de56e6820560d2d87446a3218fb7cc0c469b02ab/assets/vanGogh5.svg" alt="Van Gogh Network" width="300" height="auto" style="display:inline-block;" style="margin: 0px 0px 0px 100px;"> </center>
 
 
 [Amazon](https://www.amazon.co.uk/Behavioral-Network-Science-Language-Society/dp/1108793339/ref=tmm_pap_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.VIM0owZ5OvE-qQ-6er4h62unMNxQAo8cpMe-0sFx52vwk3eEV_upmcQfoQM9AfjhWl0IK91MGi8W3q-JPOobAal1ctFA8UqgCV09HF7qijMPN35S1qQBS4ovtV3rTcp972SrY1tniTJxyF6VR9_Yibz9kKs5wnP7cQkezpt2JC8AyPxzy6gYp3Ol0NFsc84JKe381o0K2UVl5l44L-11mFCfDwJlnY1dRsB3Wb5CcZ0.vBS24AYJ8GpnhEtwc1v7yRDZoAdB3KZLIX5IOtbn-Hw&qid=1713038286&sr=8-1) | [Cambridge University Press](https://www.cambridge.org/core/books/behavioral-network-science/4418BD265A869EADFC574AD07050111D) 
