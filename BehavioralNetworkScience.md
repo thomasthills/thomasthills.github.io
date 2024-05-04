@@ -40,7 +40,7 @@ The R code and data will be available on Github soon.  Email me if you're curiou
   
 ####  Part IV: Society 
 - Chapter 14:  Network Illusions: How Structure Misleads Us 
-- Chapter 15:  Group Problem Solving: Harnessing The Wisdom Of The Crowds 
+- Chapter 15:  [Group Problem Solving: Harnessing The Wisdom Of The Crowds](https://doi.org/10.31234/osf.io/eyrzg)
 - Chapter 16:  The Segregation of Belief: How Structure Facilitates False Consensus 
 - Chapter 17:  The Conspiracy Frame: Coherence Through Self-Supporting Beliefs
 - Chapter 18:  The Kennedy Paradox: Games Of Conflict And Escalation 
