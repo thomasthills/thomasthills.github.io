@@ -9,7 +9,8 @@ description: A book about how and why structure matters in the behavioral scienc
     <img src="./BNWCover2.jpg" width = "200" style="display:inline-block;" style="margin: 0px 0px 0px 0px;">
     <img src="https://raw.githubusercontent.com/thomasthills/thomasthills.github.io/de56e6820560d2d87446a3218fb7cc0c469b02ab/assets/vanGogh5.svg" alt="Van Gogh Network" width="300" height="auto" style="display:inline-block;" style="margin: 0px 0px 0px 100px;"></center>
 
-_(network on cover is of artists mentioned in Van Gogh's letters)_
+<p style="text-align:center"> <sub><sup>network on cover is of artists mentioned in Van Gogh's letters</sup></sub> </p>
+
 
 _Behavioural Network Science: Language, Mind, and Society_ provides a brief introduction to network science alongside an exploration of theory and problems in the behavioural sciences, including topics like language evolution, development, memory, creativity, conspiracy theories, aging, human conflict, and group problem solving. This book includes fully commented R code and data to reproduce all network visualizations, simulations, tables, and figures. 
 
