@@ -19,7 +19,7 @@ _Behavioural Network Science: Language, Mind, and Society_ provides a brief intr
 
 ## [**R Code Link**](https://github.com/thomasthills/BehavioralNetworkScience/tree/main)
 
-## [**Resources for Teaching**](TeachingResources.md) <sub><sup>students don't need to own the book to use this.</sup></sub>
+## [**Resources for Teaching Using a Network of Your Students**](TeachingResources.md) <sub><sup>You don't need to own the book to use this.</sup></sub>
 
 
 ## Table of Contents
