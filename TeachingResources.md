@@ -1,4 +1,4 @@
-# Teaching Resources
+# Behavioral Network Science: Teaching Resources
 
 Teaching resources for this book currently include code for working through the first three chapters of the book, "A Brief Guide to Network Science," with a classroom, using a network the students can rapidly build making connections among themselves. 
 
