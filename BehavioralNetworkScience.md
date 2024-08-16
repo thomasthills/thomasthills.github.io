@@ -14,7 +14,7 @@ description: A book about how and why structure matters in the behavioral scienc
 
 _Behavioural Network Science: Language, Mind, and Society_ provides a brief introduction to network science alongside an exploration of theory and problems in the behavioural sciences, including topics like language evolution, development, memory, creativity, conspiracy theories, aging, human conflict, and group problem solving. This book includes fully commented R code and data to reproduce all network visualizations, simulations, tables, and figures. 
 
-## [**R Code Link to Reproduce Figures and Simulations in the Book**](https://github.com/thomasthills/BehavioralNetworkScience/tree/main)
+## [**R Code to Reproduce All Figures and Simulations in the Book**](https://github.com/thomasthills/BehavioralNetworkScience/tree/main)
 
 ## [**R Code for Teaching Using a Network of Your Students**](TeachingResources.md) <sub><sup>You don't need to own the book to use this.</sup></sub>
 
