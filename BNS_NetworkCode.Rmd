@@ -1,0 +1,579 @@
+---
+title: "Behavioral Network Science Code Supplement"
+author: "Thomas T. Hills"
+output: pdf_document
+date: "2024-08-14"
+---
+
+# Network Science Code
+
+This code walks you through the process to generate networks, upload and download network data, measure network features, and generate random networks in Chapter 1, 2, and 3 of *Behavioral Network Science: Language, Mind, and Society*.
+
+First, start by creating a clean sandbox (remove all prior data in your workspace) and upload the igraph package. (you can run the code in each chunk by pressing the green triangle in the upper right corner. You can also run them all by selecting the down arrow next to the -\> Run command on the upper right of this window.)
+
+```{r setup, include=FALSE}
+# words after the # are a comment
+
+# remove all existing data
+rm(list=ls())
+# install.packages(igraph)  # uncomment this to install igraph
+library(igraph) # run this to make the commands accessable
+
+# turn off warnings in pdf
+knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+```
+
+# Create a class network
+
+Let's start by creating and uploading our first network. The network is made of individuals who indicate 'how much they are interested in' (or affiliate with) various interests. This is called an *affiliation network*.
+
+I've created an example you can download here: <https://docs.google.com/spreadsheets/d/10D2LksgHJyQSLNuk34I-Re89TDaOimyG1DnNiaXhv1Y/edit?gid=0#gid=0>
+
+This is saved as a csv file from google sheets by choosing 'File \> Download \> Comma Separated Values (.csv)'. Save this to a file called ClassNetworkExample.csv.
+
+Then, in RStudio select 'Session \> Set Working Directory \> Choose Directory' then choose the folder that contains the ClassNetworkExample.csv file. Then you can upload it as follows:
+
+```{r loadClassNetwork}
+
+am <- read.csv("ClassNetworkExample.csv", header = T, row.names=1 )
+# 'header = T' and 'row.names = 1' insure the names are used as column names and row names.  Without these, the network may look a bit strange. 
+
+# check the names of columns and rows
+colnames(am)
+rownames(am)
+# take a look at the matrix
+am
+# if the network contains extra rows or columns that shouldn't be included, cut it down to the right size by choosing the correct columns and rows.
+am <- am[1:10,1:8]  # first 10 rows and first 8 columns
+
+# Create an igraph network
+gbn<- igraph::graph_from_biadjacency_matrix(am, weighted = TRUE)
+
+# inspect the igraph network
+gbn
+
+```
+
+## Visualize the network
+
+Once we've created an igraph network, we can visualize it.
+
+```{r visualize, echo=FALSE}
+# R knows to plot igraph objects as networks
+plot(gbn)
+par(mfrow=c(1,1)) # this will create one plot in the window
+plot(gbn, vertex.color = "cornflowerblue", vertex.size = 20, layout = layout_nicely)
+
+```
+
+This network contains two types of nodes. It is therefore called a *bipartite network*. One type is individuals. The other type is the affiliation (or interest). Ideally, we would like a network of people who share edges if they have shared interests. That is, we would like a *monopartite network* that only contains individuals.
+
+## Project the network
+
+We can project the bipartite network onto two monopartite networks. One representing the people and the other the items their are affiliated with.
+
+```{r projectbi, echo=FALSE}
+# The function to project.  Multiplicitity = TRUE will produce weighted edges between people that represent the number of affiliations they share. 
+g.bp <- igraph::bipartite_projection(gbn, multiplicity=TRUE)
+# Here is the class network
+cnetwork <- g.bp[[1]]
+# Here is the feature network
+feature_network <- g.bp[[2]]
+# This will create two plots in the window
+par(mfrow=c(1,2))
+# class network
+plot(cnetwork)
+# feature network
+plot(feature_network)
+```
+
+## The igraph object
+
+```{r seeIgraphObject}
+cnetwork
+```
+
+Below is the igraph object produced by running the above. It tells us we have an IGRAPH object. It has an arbitrary code then UNW-. 'U' indicates it is unweighted. 'N' tells us the nodes are named. 'W' is for a weighted graph. And if the last one were a 'B', it would indicate the network was bipartite. Check the 'gbn' network above.
+
+Next to that we see the number of nodes, then the number of edges.
+
+Then we get a list of attributes. 'name (v/c)' means the 'v'ertices are named with a 'c'haracter string. 'weight (e/n)' means the 'e'dges are weighted with a 'n'umeric value.
+
+Then we see a selection of edges with their names.
+
+![](images/Screenshot%202024-08-15%20at%2018.54.46.png)
+
+We can check this with code.
+
+```{r networkFeatures}
+# count nodes
+vcount(cnetwork)
+# count edges
+ecount(cnetwork)
+# what are the nodes
+V(cnetwork)
+# what are the edges
+E(cnetwork)
+# get list of names
+V(cnetwork)$name
+# get list of weights
+E(cnetwork)$weight
+```
+
+## Threshold the network
+
+With a weighted network, we can turn it into a weighted network by thresholding edges below some threshold value. This can help us to see structure, for example, if all the nodes are connected.
+
+```{r threshold}
+# thresh_graph is a function I wrote to remove edges below a threshold and change the weightes of all remaining edges to 1. Inputs are a graph and a threshold value. You never need to change the code below.
+thresh_graph <- function(g, thresh) {
+  # remove edges with weight < thresh
+  gt <- igraph::delete_edges(g, E(g)[E(g)$weight < thresh])
+  # set remaining edges to 1
+  E(gt)$weight <- 1
+  # return graph
+  return(gt)
+}
+
+# we can use the thresh_graph function to threshold our class network and make a new network
+
+cnetwork3 <- thresh_graph(cnetwork, 3)
+# one plot window
+par(mfrow=c(1,1))
+plot(cnetwork3)
+
+
+```
+
+Let's visualize all the thresholds.
+
+```{r threshold across all weights}
+# What is the max weight
+maxweight <- max(E(cnetwork)$weight)
+# What is the min weight
+minweight <- min(E(cnetwork)$weight)
+# make a plot layout with a panel for each network
+par(mfrow=c(1,maxweight-minweight+2))
+# make margins wider so we can see the networks
+par(mar=c(1,1,1,1))
+# make a for loop to run through all the weights
+for(i in minweight:(maxweight+1)){
+ g <- thresh_graph(cnetwork, i) 
+ plot(g, vertex.label = NA)
+ text(1, -1, i)
+}
+
+# Choose a threshold that includes everyone but isn't fully connected to use for what comes next
+cnetwork3 <- thresh_graph(cnetwork, 3)
+```
+
+## Edgelist and uploading edgelists
+
+Our network can be represented as an edgelist.
+
+```{r edgelist}
+edgeList <- igraph::as_edgelist(cnetwork3)
+
+edgeList
+```
+
+We can save and upload edge lists. So if you data is an edgelist, you can upload it and make a network.
+
+```{r edgelistUpload}
+# write the edge list to a csv file you can open with a text editor
+write.csv(edgeList, file="edgelist.csv", quote=FALSE, row.names = FALSE)
+# inspect the csv file in excel or a text editor
+# read an edgelist into R -- it needs to be in csv format (or choose a different function to upload it)
+el <- read.csv("edgelist.csv") 
+
+el
+
+# el is currently a data.frame
+class(el)
+# turn the edge list into a matrix to make it into a graph
+el <- as.matrix(el) 
+
+# transform matrix into graph object 
+uploadedgraph <- igraph::graph_from_edgelist(el, directed=F) # make it undirected 
+
+# one plot in the window
+par(mfrow=c(1,1))
+# plot it
+plot(uploadedgraph)
+
+```
+
+## Adjacency matrix
+
+Our network can also be represented as an adjacency matrix.
+
+```{r adjmat}
+# Get adjacency matrix from graph object.  Assign sparse = F if you want to see the zeros
+am <- igraph::as_adjacency_matrix(cnetwork3, sparse=F)
+# see it
+am
+```
+
+We can save and upload an adjacency matrix. So if you data is an adjacency matrix, you can upload it and make a network.
+
+```{r adjmatUpload}
+# save it to a file
+write.csv(am, file="adjacencyMatrix.csv", quote = F) # open this in excel or a text editor
+
+# upload adjacency matrix
+uploadedam <- read.csv("adjacencyMatrix.csv", header = T, row.names=1 ) # set row.names = 1 so it knows the names are in the first row, otherwise it will look weird
+
+# transform data frame into matrix so we can make it into a graph
+uploadedam <- as.matrix(uploadedam)
+# transform matrix into graph object, assign undirected
+uploadedgrapham <- igraph::graph_from_adjacency_matrix(uploadedam, mode="undirected")
+
+# plot 
+plot(uploadedgrapham, vertex.label.size=2, vertex.color="white")
+
+```
+
+# Network metrics
+
+## Density
+
+Density is the proportion of possible edges that have edges.
+
+$$ \rho = \frac{2m}{n(n-1)}$$
+
+Where *m* is the number of observed edges and *n* is the number of nodes.
+
+```{r density}
+edge_density(cnetwork3)
+
+# how many nodes
+n = vcount(cnetwork3)
+vcount(cnetwork3)
+# how many possible edges for an undirected network of this size
+n*(n-1)/2
+# how many observed edges
+m = ecount(cnetwork3)
+ecount(cnetwork3)
+
+# density
+2*m/(n*(n-1))
+```
+
+## Degree
+
+Degree is the count of the edges for a node.
+
+```{r degree}
+igraph::degree(cnetwork3) # you need the igraph to indicate which package if there is more than one package that uses degree.
+
+# plot node size proportional to degree
+# one plot window
+par(mfrow=c(1,1))
+# plot
+plot(cnetwork3, vertex.size = igraph::degree(cnetwork3))
+```
+
+## Strength
+
+Strength is the sum of the weights for a node.
+
+```{r strength}
+igraph::strength(cnetwork)
+
+# two different ways to plot so edge weights pull things together
+# make two plot windows
+par(mfrow=c(1,2))
+# plot the weighted network for visual inspection and make distances proportional to the inverse of the weight (otherwise layout_with_kk plots weight as distance)
+plot(cnetwork, edge.width=E(cnetwork)$weight, layout=layout_with_kk(cnetwork, weight=1/E(cnetwork)$weight))
+# layout with fr uses weights by default to pull nodes together
+plot(cnetwork, edge.width=E(cnetwork)$weight, layout=layout_with_fr)
+```
+
+## Clustering coefficient
+
+The local clustering coefficient computes the proportion of a node's neighbors that are connected to one another.
+
+```{r clusteringcoef}
+igraph::transitivity(cnetwork3, type = "local")
+
+# plot node size proportional to clustering coefficient
+# make one plot window
+par(mfrow=c(1,1))
+# plot
+plot(cnetwork3, vertex.size = igraph::transitivity(cnetwork3, type="local")*10, vertex.label.dist = 2)
+# Note: I multiply the size by 10 to increase the node sizes.  I also move the labels away from the node centers with vertex.label.dist = 2.
+
+# The average clustering coefficient for the entire graph
+igraph::transitivity(cnetwork3, type = "localaverage") 
+# The transitivity for the entire graph (number of transitive triads among 2-stars)
+igraph::transitivity(cnetwork3, type = "global")
+
+```
+
+## Betweenness
+
+Betweenness is the number of shortest paths in the network that pass through a node.
+
+```{r betweenness}
+igraph::betweenness(cnetwork3)
+
+# plot node size proportional to betweenness
+# make one plot window
+par(mfrow=c(1,1))
+# plot
+plot(cnetwork3, vertex.size = igraph::betweenness(cnetwork3)*2, vertex.label.dist = 2)
+# Note: I multiply the betweenness by 2 to increase the node sizes.  I also move the labels away from the node centers with vertex.label.dist = 2.
+
+```
+
+## Closeness
+
+Normalized closeness is the inverse average distance to all other nodes.
+
+```{r closeness}
+igraph::closeness(cnetwork3, normalized = TRUE) 
+
+# plot node size proportional to betweenness
+# make one plot window
+par(mfrow=c(1,1))
+# plot
+plot(cnetwork3, vertex.size = igraph::closeness(cnetwork3, normalized = TRUE)*10, vertex.label.dist = 2)
+# Note: I multiply the closeness by 10 to increase the node sizes.  I also move the labels away from the node centers with vertex.label.dist = 2.
+```
+
+## Eigenvector centrality
+
+Eigenvector centrality shows how important a node is in a network by looking at how well-connected it is to other important nodes.
+
+```{r eigenvector}
+eigen_centrality(cnetwork3)$vector
+
+# plot node size proportional to eigenvector centrality
+# make one plot window
+par(mfrow=c(1,1))
+# plot
+plot(cnetwork3, vertex.size = eigen_centrality(cnetwork3)$vector*10, vertex.label.dist = 2)
+# Note: I multiply the eigencentrality by 10 to increase the node sizes.  I also move the labels away from the node centers with vertex.label.dist = 2.
+```
+
+## Assortativity
+
+Assortativity is the correlation in node attributes across all edges.
+
+A network that is assortative by degree has high degree nodes connected to other high degree nodes and low degree nodes connected to other low degree nodes.
+
+```{r assortativity}
+igraph::assortativity_degree(cnetwork3)
+
+# let's color the nodes by degree for visual inspection
+pal = colorRampPalette(c("orange", "blue"))
+### assign colors
+V(cnetwork3)$color = pal(10)[igraph::degree(cnetwork3)] 
+plot(cnetwork3, vertex.label.dist=2)
+```
+
+## Community detection
+
+Community detection algorithms attempt to identify communities of nodes based on how edges are distributed among communities of the same members. There are many different kinds. I show three below.
+
+They each produce a *modularity* measure, *Q*, for a network, which indicates how well members of a community are connected with one another but not other groups. Higher modularity is better.
+
+Since each algorithm is a method of searching for good communities in a very large space, they may find different communities. The one with the best modularity is 'objectively' better.
+
+```{r communitydetection}
+
+# reassign network to a new name, so we can run this on whatever network we like without having to fuss with all the names
+
+# here are three to try.  Remove the comment # to try different ones
+gfcd <- cnetwork3
+# try a different threshold for the classnetwork
+# gfcd <- thresh_graph(cnetwork, 4)
+# or try a random graph
+gfcd <- sample_gnp(20, .1)
+
+# now plot
+# Set a common layout for all of them so the differences are easy to see. 
+# fix layout
+l = igraph::layout_with_fr(gfcd)
+# Girvan-Newman (or edge betweenness)
+cebetex <- igraph::cluster_edge_betweenness(gfcd) 
+# Modularity for Girvan-Newman on this network
+max(cebetex$modularity)
+# Louvain
+ceblouv <- igraph::cluster_louvain(gfcd,weights=NA) 
+# Modularity for Louvain
+max(ceblouv$modularity)
+# Walktrap
+cebwalkt <- igraph::cluster_walktrap(gfcd) 
+# Modularity for walktrap
+max(cebwalkt$modularity)
+#plot margins 
+par(mar=c(2,2,2,2))
+# plot three panels side by side
+par(mfrow=c(1,3))
+# set node size for all networks
+c =20 
+# plot them
+plot(cebetex, gfcd, mark.border="gray90", 
+     mark.col=c("gray90"), 
+    vertex.label.cex=.7, layout = l, vertex.size = c, vertex.color=cebetex$membership)
+# tuning parameter for text
+cl = -20
+# add text beneath graph
+title("Girvan-Newman", line = cl)
+plot(ceblouv, gfcd, col=ceblouv$membership, mark.border="gray90", 
+     mark.col=c("gray90"), 
+    vertex.label.cex=.7, layout = l, vertex.size = c)
+title("Louvain", line = cl)
+plot(cebwalkt, gfcd, col=cebwalkt$membership, mark.border="gray90", 
+     mark.col=c("gray90"), 
+    vertex.labelNewman.cex=.7, layout = l, vertex.size = c)
+title("Walktrap", line = cl)
+
+
+```
+
+# Generative Graphs and Network Evolution
+
+## Erdös-Renyi Random Graph
+
+An Erdös-Renyi Random Graph is created by producing a network with *n* nodes and creating edges between each pair of nodes with probability *p*. Or, selecting a specific number of edges, *m*. You can therefore compare a known network with random version with the same size, *n*, and density, either *p* or *m*.
+
+```{r errandomgraph}
+ergp <- sample_gnp(40, .05)
+ergm <- sample_gnm(40, 39) 
+
+# make two plots
+par(mfrow=c(1,2))
+plot(ergp, vertex.label = NA, vertex.color = "coral")
+plot(ergm, vertex.label = NA, vertex.color = "coral")
+
+```
+
+Here's a really big one, with edges alphaed to make them transparent.
+
+```{r bigerrandomgraph}
+ergpbig <- sample_gnp(1000, .01)
+
+# use the scales library to alpha the edges
+library(scales)
+# reset the plot window
+dev.off()
+# make one plot
+par(mfrow=c(1,1))
+# set margins
+par(mar=c(1,1,1,1))
+# plot
+plot(ergpbig, vertex.label = NA, edge.color = alpha("black", alpha = .05), vertex.color = "red", vertex.size = 1)
+
+```
+
+## Small world network
+
+The Watts Strogatz small world model starts with a ring lattice and rewires edges with probabiliby *p*.
+
+```{r smallworld}
+swnp0 <- sample_smallworld(1,10,2, p=0)
+swnp.1 <- sample_smallworld(1,10,2, p=.1)
+swnp.2 <- sample_smallworld(1,10,2, p=.2)
+
+# make three plots side by side
+par(mfrow=c(1,3))
+# plot each one
+plot( swnp0, vertex.label = NA, vertex.color="chocolate1", main = "Small world p = 0", layout=layout_in_circle)
+plot( swnp.1, vertex.label = NA, vertex.color="chocolate2", main = "Small world p = .1", layout=layout_in_circle)
+plot( swnp.2, vertex.label = NA, vertex.color="chocolate3", main = "Small world p = .2", layout=layout_in_circle)
+
+```
+
+## Small World Index
+
+Humphries and Gurney's small world index is a value for a network based on a comparison with an ER-random graph of the same size and density.
+
+Formally, it is
+
+$$ SWI = \frac{\frac{C_{obs}}{C_{ER}}}{\frac{L_{obs}}{L_{ER}}} $$
+
+Where *obs* is the observed network (i.e., your network of interest) and *ER* is the average value for a large number of Erdös-Renyi random graphs of the same size and density.
+
+You can compute your own ER random graphs, or you can use a function to do it for you.
+
+```{r smallworldindex}
+# need qgraph for this
+library(qgraph)
+# compute small world index
+qgraph::smallworldIndex(cnetwork3)
+```
+
+## Telesford's small world measure
+
+Telesford's measure compares a network with a lattice and a random graph. Values greater than 0 indicate more smallworldedness. Values less than 0 indicate more ordered.
+
+```{r telesfordSW}
+# need networktoolbox for this one
+library(NetworkToolbox)
+# make network for networktoolbox
+am <- igraph::as_adjacency_matrix(cnetwork3, sparse=F)
+# use adjacency matrix
+# compute Telesford's measure
+NetworkToolbox::smallworldness(am, method="TJHBL")
+
+```
+
+## Preferential attachment
+
+Preferential attachment is an algorithm for generating networks that grow, one node at a time, with each new node preferentially attaching to nodes with higher degree in the existing network.
+
+```{r panetwork}
+pan <- igraph::sample_pa(100, m=1, power=1.5, zero.appeal=1, directed=FALSE, algorithm="psumtree")
+# 
+# one plot frame
+par(mfrow=c(1,1))
+# plot
+plot(pan, vertex.label=NA, vertex.size = igraph::degree(pan)/2, vertex.color ="black")
+
+```
+
+## Scale free degree distribution
+
+Preferential attachment models create scale-free degree distribution where the 'rich get richer'. Scale-free indicates that the mean is not really a useful measure. If you lived in a scale-free heigh distribution, you would not be surprised to find that most people are very short, but a few are as tall as buildings, and fewer still skyscrapers, and fewer still as tall as mountains. Earthquakes are scale free in size.
+
+This produces a line (more or less) on a log-log plot.
+
+```{r plotscalefreedistribution}
+# make pa network
+pan100 <- igraph::sample_pa(100, m=1, power=1, zero.appeal=1, directed=FALSE, algorithm="psumtree")
+# make two panes
+par(mfrow=c(1,2))
+# plot it
+plot(pan100, vertex.label=NA, vertex.size = igraph::degree(pan)/2, vertex.color ="black")
+
+degdist <- igraph::degree(pan100, mode="all")
+  # Reverse rank
+  ranko <- rank(-degdist)
+  # Make data frame
+  gsd <- data.frame(degdist, ranko)
+  # set margins
+  par(mar=c(4,4,1,2))
+  plot(ranko, degdist, log="xy", xlab = "Rank", ylab = "P(Total degree)")
+
+
+```
+
+## Configuration model
+
+A configuration model cuts all the edges in the network and then rewires them. This preserves the size of the network, the density, and the degree of each node.
+
+```{r configmodel}
+cnetconfig <- rewire(cnetwork3, igraph::keeping_degseq(niter = 10))
+
+# plot two frames
+par(mfrow=c(1,2))
+# set margins to make plots big
+par(mar=c(1,1,1,1))
+# plot cnetwork3
+plot(cnetwork3, vertex.label.dist = 2, main = "Original")
+# plot rewired cnetwork 
+plot(cnetconfig, vertex.label.dist = 2, main = "Reconfigured")
+
+```
