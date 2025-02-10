@@ -1,10 +1,3 @@
----
-title: "Behavioral Network Science Code Supplement"
-author: "Thomas T. Hills"
-output: pdf_document
-date: "2024-08-14"
----
-
 # Network Science Code
 
 This code walks you through the process to generate networks, upload and download network data, measure network features, and generate random networks in Chapter 1, 2, and 3 of *Behavioral Network Science: Language, Mind, and Society*.
@@ -62,7 +55,7 @@ Once we've created an igraph network, we can visualize it.
 # R knows to plot igraph objects as networks
 plot(gbn)
 par(mfrow=c(1,1)) # this will create one plot in the window
-plot(gbn, vertex.color = "cornflowerblue", vertex.size = 20, layout = layout_nicely)
+plot(gbn, vertex.color = "cornflowerblue", vertex.size = 20, layout = igraph::layout_nicely)
 
 ```
 
@@ -107,17 +100,17 @@ We can check this with code.
 
 ```{r networkFeatures}
 # count nodes
-vcount(cnetwork)
+igraph::vcount(cnetwork)
 # count edges
-ecount(cnetwork)
+igraph::ecount(cnetwork)
 # what are the nodes
-V(cnetwork)
+igraph::V(cnetwork)
 # what are the edges
-E(cnetwork)
+igraph::E(cnetwork)
 # get list of names
-V(cnetwork)$name
+igraph::V(cnetwork)$name
 # get list of weights
-E(cnetwork)$weight
+igraph::E(cnetwork)$weight
 ```
 
 ## Threshold the network
@@ -128,16 +121,16 @@ With a weighted network, we can turn it into a weighted network by thresholding 
 # thresh_graph is a function I wrote to remove edges below a threshold and change the weightes of all remaining edges to 1. Inputs are a graph and a threshold value. You never need to change the code below.
 thresh_graph <- function(g, thresh) {
   # remove edges with weight < thresh
-  gt <- igraph::delete_edges(g, E(g)[E(g)$weight < thresh])
+  gt <- igraph::delete_edges(g, igraph::E(g)[igraph::E(g)$weight < thresh])
   # set remaining edges to 1
-  E(gt)$weight <- 1
+  igraph::E(gt)$weight <- 1
   # return graph
   return(gt)
 }
 
 # we can use the thresh_graph function to threshold our class network and make a new network
 
-cnetwork3 <- thresh_graph(cnetwork, 3)
+cnetwork3 <- thresh_graph(cnetwork, 4)
 # one plot window
 par(mfrow=c(1,1))
 plot(cnetwork3)
@@ -149,9 +142,9 @@ Let's visualize all the thresholds.
 
 ```{r threshold across all weights}
 # What is the max weight
-maxweight <- max(E(cnetwork)$weight)
+maxweight <- max(igraph::E(cnetwork)$weight)
 # What is the min weight
-minweight <- min(E(cnetwork)$weight)
+minweight <- min(igraph::E(cnetwork)$weight)
 # make a plot layout with a panel for each network
 par(mfrow=c(1,maxweight-minweight+2))
 # make margins wider so we can see the networks
@@ -244,16 +237,16 @@ $$ \rho = \frac{2m}{n(n-1)}$$
 Where *m* is the number of observed edges and *n* is the number of nodes.
 
 ```{r density}
-edge_density(cnetwork3)
+igraph::edge_density(cnetwork3)
 
 # how many nodes
-n = vcount(cnetwork3)
-vcount(cnetwork3)
+n = igraph::vcount(cnetwork3)
+igraph::vcount(cnetwork3)
 # how many possible edges for an undirected network of this size
 n*(n-1)/2
 # how many observed edges
-m = ecount(cnetwork3)
-ecount(cnetwork3)
+m = igraph::ecount(cnetwork3)
+igraph::ecount(cnetwork3)
 
 # density
 2*m/(n*(n-1))
@@ -284,9 +277,9 @@ igraph::strength(cnetwork)
 # make two plot windows
 par(mfrow=c(1,2))
 # plot the weighted network for visual inspection and make distances proportional to the inverse of the weight (otherwise layout_with_kk plots weight as distance)
-plot(cnetwork, edge.width=E(cnetwork)$weight, layout=layout_with_kk(cnetwork, weight=1/E(cnetwork)$weight))
+plot(cnetwork, edge.width=igraph::E(cnetwork)$weight, layout=igraph::layout_with_kk(cnetwork, weight=1/igraph::E(cnetwork)$weight))
 # layout with fr uses weights by default to pull nodes together
-plot(cnetwork, edge.width=E(cnetwork)$weight, layout=layout_with_fr)
+plot(cnetwork, edge.width=igraph::E(cnetwork)$weight, layout=igraph::layout_with_fr)
 ```
 
 ## Clustering coefficient
@@ -346,13 +339,13 @@ plot(cnetwork3, vertex.size = igraph::closeness(cnetwork3, normalized = TRUE)*10
 Eigenvector centrality shows how important a node is in a network by looking at how well-connected it is to other important nodes.
 
 ```{r eigenvector}
-eigen_centrality(cnetwork3)$vector
+igraph::eigen_centrality(cnetwork3)$vector
 
 # plot node size proportional to eigenvector centrality
 # make one plot window
 par(mfrow=c(1,1))
 # plot
-plot(cnetwork3, vertex.size = eigen_centrality(cnetwork3)$vector*10, vertex.label.dist = 2)
+plot(cnetwork3, vertex.size = igraph::eigen_centrality(cnetwork3)$vector*10, vertex.label.dist = 2)
 # Note: I multiply the eigencentrality by 10 to increase the node sizes.  I also move the labels away from the node centers with vertex.label.dist = 2.
 ```
 
@@ -368,7 +361,7 @@ igraph::assortativity_degree(cnetwork3)
 # let's color the nodes by degree for visual inspection
 pal = colorRampPalette(c("orange", "blue"))
 ### assign colors
-V(cnetwork3)$color = pal(10)[igraph::degree(cnetwork3)] 
+igraph::V(cnetwork3)$color = pal(10)[igraph::degree(cnetwork3)] 
 plot(cnetwork3, vertex.label.dist=2)
 ```
 
@@ -389,7 +382,7 @@ gfcd <- cnetwork3
 # try a different threshold for the classnetwork
 # gfcd <- thresh_graph(cnetwork, 4)
 # or try a random graph
-gfcd <- sample_gnp(20, .1)
+gfcd <- igraph::sample_gnp(20, .1)
 
 # now plot
 # Set a common layout for all of them so the differences are easy to see. 
@@ -440,8 +433,8 @@ title("Walktrap", line = cl)
 An Erdös-Renyi Random Graph is created by producing a network with *n* nodes and creating edges between each pair of nodes with probability *p*. Or, selecting a specific number of edges, *m*. You can therefore compare a known network with random version with the same size, *n*, and density, either *p* or *m*.
 
 ```{r errandomgraph}
-ergp <- sample_gnp(40, .05)
-ergm <- sample_gnm(40, 39) 
+ergp <- igraph::sample_gnp(40, .05)
+ergm <- igraph::sample_gnm(40, 39) 
 
 # make two plots
 par(mfrow=c(1,2))
@@ -453,7 +446,7 @@ plot(ergm, vertex.label = NA, vertex.color = "coral")
 Here's a really big one, with edges alphaed to make them transparent.
 
 ```{r bigerrandomgraph}
-ergpbig <- sample_gnp(1000, .01)
+ergpbig <- igraph::sample_gnp(1000, .01)
 
 # use the scales library to alpha the edges
 library(scales)
@@ -473,16 +466,16 @@ plot(ergpbig, vertex.label = NA, edge.color = alpha("black", alpha = .05), verte
 The Watts Strogatz small world model starts with a ring lattice and rewires edges with probabiliby *p*.
 
 ```{r smallworld}
-swnp0 <- sample_smallworld(1,10,2, p=0)
-swnp.1 <- sample_smallworld(1,10,2, p=.1)
-swnp.2 <- sample_smallworld(1,10,2, p=.2)
+swnp0 <- igraph::sample_smallworld(1,10,2, p=0)
+swnp.1 <- igraph::sample_smallworld(1,10,2, p=.1)
+swnp.2 <- igraph::sample_smallworld(1,10,2, p=.2)
 
 # make three plots side by side
 par(mfrow=c(1,3))
 # plot each one
-plot( swnp0, vertex.label = NA, vertex.color="chocolate1", main = "Small world p = 0", layout=layout_in_circle)
-plot( swnp.1, vertex.label = NA, vertex.color="chocolate2", main = "Small world p = .1", layout=layout_in_circle)
-plot( swnp.2, vertex.label = NA, vertex.color="chocolate3", main = "Small world p = .2", layout=layout_in_circle)
+plot( swnp0, vertex.label = NA, vertex.color="chocolate1", main = "Small world p = 0", layout=igraph::layout_in_circle)
+plot( swnp.1, vertex.label = NA, vertex.color="chocolate2", main = "Small world p = .1", layout=igraph::layout_in_circle)
+plot( swnp.2, vertex.label = NA, vertex.color="chocolate3", main = "Small world p = .2", layout=igraph::layout_in_circle)
 
 ```
 
@@ -565,7 +558,7 @@ degdist <- igraph::degree(pan100, mode="all")
 A configuration model cuts all the edges in the network and then rewires them. This preserves the size of the network, the density, and the degree of each node.
 
 ```{r configmodel}
-cnetconfig <- rewire(cnetwork3, igraph::keeping_degseq(niter = 10))
+cnetconfig <- igraph::rewire(cnetwork3, igraph::keeping_degseq(niter = 10))
 
 # plot two frames
 par(mfrow=c(1,2))
