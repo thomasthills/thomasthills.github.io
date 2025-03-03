@@ -18,7 +18,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE)
 
 # Create a class network
 
-Let's start by creating and uploading our first network. The network is made of individuals who indicate 'how much they are interested in' (or affiliate with) various interests. This is called an *affiliation network*.
+Let's start by creating and uploading our first network. The network is made of individuals who indicate 'how much they are interested in' (or affiliate with) various interests on a scale from 0 to 5. This is called an *affiliation network*.
 
 I've created an example you can download here: <https://docs.google.com/spreadsheets/d/10D2LksgHJyQSLNuk34I-Re89TDaOimyG1DnNiaXhv1Y/edit?gid=0#gid=0>
 
@@ -134,6 +134,8 @@ cnetwork3 <- thresh_graph(cnetwork, 4)
 # one plot window
 par(mfrow=c(1,1))
 plot(cnetwork3)
+
+# If every cell the original affiliation matrix has a value greater than 0 for all features, then they will all be equally connected to one another in the projections. The projection to one node type counts all paths through nodes of the other type, whatever there weight. In that case, you may want to threshold the original affiliation network.
 
 
 ```
