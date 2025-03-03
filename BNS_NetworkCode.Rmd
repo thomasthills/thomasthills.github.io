@@ -135,7 +135,7 @@ cnetwork3 <- thresh_graph(cnetwork, 4)
 par(mfrow=c(1,1))
 plot(cnetwork3)
 
-# If every cell the original affiliation matrix has a value greater than 0 for all features, then they will all be equally connected to one another in the projections. The projection to one node type counts all paths through nodes of the other type, whatever there weight. In that case, you may want to threshold the original affiliation network.
+# If every cell the original affiliation matrix has a value greater than 0 for all features, then they will all be equally connected to one another in the projections. The projection to one node type counts all paths through nodes of the other type, whatever there weight. In that case, you may want to threshold the original affiliation network.  Chapter 6, "What is distinctive", in the Behavioral Network Science book deals with other ways to measure similarity between nodes in a projection. 
 
 
 ```
