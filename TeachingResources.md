@@ -22,6 +22,43 @@ This provides (almost) all the images in the book.
 
 [**Chapter 1 Figures**](Chapter1Figures)
 
+[**Chapter 2 Figures**](Chapter2Figures)
+
+[**Chapter 3 Figures**](Chapter3Figures)
+
+[**Chapter 4 Figures**](Chapter4Figures)
+
+[**Chapter 5 Figures**](Chapter5Figures)
+
+[**Chapter 6 Figures**](Chapter6Figures)
+
+[**Chapter 7 Figures**](Chapter7Figures)
+
+[**Chapter 8 Figures**](Chapter8Figures)
+
+[**Chapter 9 Figures**](Chapter9Figures)
+
+[**Chapter 10 Figures**](Chapter10Figures)
+
+[**Chapter 11 Figures**](Chapter11Figures)
+
+[**Chapter 12 Figures**](Chapter12Figures)
+
+[**Chapter 13 Figures**](Chapter13Figures)
+
+[**Chapter 14 Figures**](Chapter14Figures)
+
+[**Chapter 15 Figures**](Chapter15Figures)
+
+[**Chapter 16 Figures**](Chapter16Figures)
+
+[**Chapter 17 Figures**](Chapter17Figures)
+
+[**Chapter 18 Figures**](Chapter18Figures)
+
+[**Chapter 19 Figures**](Chapter19Figures)
+
+
 ## Code for the entire book
 
 A link to the code for reproducing *all* the figures and simulations in the book can be found on the home page for the book. 
