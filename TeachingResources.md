@@ -2,7 +2,9 @@
 # Teaching Resources for BNS
 
 ## Slides 
-Slides for a 3-day workhop I gave in Hohenheim: [**Day1**](Day1_slides_2023_Hohenheim.pdf), [**Day2**](Day2_slides_2023_Hohenheim.pdf), and [**Day3**](Day3_slides_2023_Hohenheim.pdf).
+Slides for a 3-day workshop I gave in Hohenheim: [**Day1**](Day1_slides_2023_Hohenheim.pdf), [**Day2**](Day2_slides_2023_Hohenheim.pdf), and [**Day3**](Day3_slides_2023_Hohenheim.pdf).
+
+Slides for 2-lecture (2-hours each): [**Lecture 1**](PS941_1.pdf), [**Lecture 2**](PS941_2.pdf)
 
 Slide for a presentation on Chapter 12: [**Aging as enrichment**](TalkOnAgingAsEnrichment_Chapter12.pdf).
 
