@@ -12,3 +12,4 @@ The link to the code is [**here**](BNS_NetworkCode.Rmd)
 A link to the code for reproducing *all* the figures and simulations in the book can be found on the home page for the book. 
 
 ### [**Behavioral Network Science**](BehavioralNetworkScience.md)
+
