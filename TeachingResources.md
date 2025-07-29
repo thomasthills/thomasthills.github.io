@@ -54,7 +54,7 @@ This provides (almost) all the images in the book.
 
 [**Chapter 16 Figures**](Chapter16Figures)
 
-[**Chapter 17 Figures**](Chapter17Figures)
+[**Chapter 17 Figures**](https://github.com/thomasthills/thomasthills.github.io/tree/main/Chapter17Figures)
 
 [**Chapter 18 Figures**](Chapter18Figures)
 
