@@ -23,9 +23,9 @@ _Behavioural Network Science: Language, Mind, and Society_ provides a brief intr
 ## Table of Contents
     
 ####   Part I: A Brief Guide To Network Science 
-- [Chapter 1:  Making And Recognizing Networks](https://github.com/thomasthills/thomasthills.github.io/edit/main/Chap1.pdf) 
-- [Chapter 2:  Network Metrics](https://github.com/thomasthills/thomasthills.github.io/edit/main/Chap2.pdf)
--  [Chapter 3:  Generative Network Models And Network Evolution](https://github.com/thomasthills/thomasthills.github.io/edit/main/Chap3.pdf)
+- <a href="thomasthills/thomasthills.github.io/edit/main/Chap1.pdf" target="_blank">Chapter 1: Making and Recognizing Networks</a>
+- <a href="thomasthills/thomasthills.github.io/edit/main/Chap2.pdf" target="_blank">Chapter 2: Network Metrics</a>
+- <a href="thomasthills/thomasthills.github.io/edit/main/Chap3.pdf" target="_blank">Chapter 3: Generative Network Models and Network evolution</a>
   
 ####   Part II: Language
 - Chapter 4:  Zipf’s Law Of Meaning: The Degree Distribution Of The Mind 
